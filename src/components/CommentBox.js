@@ -4,19 +4,19 @@ import requireAuth from 'components/requireAuth';
 import * as actions from 'actions';
 
 class CommentBox extends React.Component {
-  state = { comment: '' };
+  // state = { comment: '' };
 
-  handleChange = event => {
-    this.setState({ comment: event.target.value });
-  };
+  // handleChange = event => {
+  //   this.setState({ comment: event.target.value });
+  // };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!this.state.comment) {
+    if (!this.textArea.value) {
       return;
     }
-    this.props.saveComment(this.state.comment);
-    this.setState({ comment: ''});
+    this.props.saveComment(this.textArea.value);
+    this.textArea.value = '';
   };
 
   render() {
@@ -24,7 +24,7 @@ class CommentBox extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
             <h4>Add a Comment</h4>
-            <textarea value={this.state.comment} onChange={this.handleChange}/>
+            <textarea ref={node => this.textArea = node}/>{ /*onChange={this.handleChange}  */}
             <div>
               <button> Submit comment </button>
             </div>
